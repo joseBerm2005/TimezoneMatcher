@@ -1,9 +1,7 @@
 ﻿using System.Globalization;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-partial
 
 
 // How this program works:
@@ -16,9 +14,21 @@ partial
 // - See what time it would be for ALL timezones (they input 7 am and it shows whats the time for the other timezones for it) 
 //- allow for a few timezones to be late but still find the most optimal
 
-class Program
+partial class Program
 {
-    static readonly List<string> timezones = []; 
+    static readonly List<string> timezones = [];
+    static readonly List<DateTime> timezoneTimes = [];
+
+    // my plan
+    // add three methods (from the algo)
+    // modify the main program to take in which 3 options
+    // use an switch statement to work with the three options (see which one)
+
+
+    static void DefaultSearch(List<DateTime> timezoneList)
+    {
+        
+    }
 
     static void Main(string[] args)
     {
@@ -34,13 +44,13 @@ class Program
             }
         } while(true);
 
-        foreach (string abbreviation in timezones) {
-            if (TryGetUtcOffset(abbreviation, out TimeSpan offset))
-            {
-                string sign = offset >= TimeSpan.Zero ? "+" : "-";
-                TimeSpan absoluteOffset = offset.Duration();
+        DateTime utcNow = DateTime.UtcNow;
 
-             //   Console.WriteLine($"{abbreviation.ToUpperInvariant()} -> UTC{sign}{absoluteOffset:hh\\:mm}");
+        foreach (string abbreviation in timezones) {
+            if (TryGetLocalTime(abbreviation, utcNow, out DateTime localTime))
+            {
+                timezoneTimes.Add(localTime);
+                Console.WriteLine($"{abbreviation.ToUpperInvariant()}: {localTime:yyyy-MM-dd HH:mm:ss}");
             }
             else {
                 Console.WriteLine($"Unknown timezone abbreviation: {abbreviation}");
@@ -48,34 +58,67 @@ class Program
         }
     }
 
-    static bool TryGetUtcOffset(string abbreviation, out TimeSpan offset)
+    static bool TryGetLocalTime(string abbreviation, DateTime utcNow, out DateTime localTime)
     {
+        localTime = default;
         string normalized = abbreviation.Trim();
 
-        if (TryParseUtcOffset(normalized, out offset))
+        if (TryParseUtcOffset(normalized, out TimeSpan offset))
         {
+            localTime = utcNow + offset;
             return true;
         }
 
-        Dictionary<string, TimeSpan> offsets = new(StringComparer.OrdinalIgnoreCase)
+        if (TryGetTimeZoneInfo(normalized, out TimeZoneInfo timezone))
         {
-            ["UTC"] = TimeSpan.Zero,
-            ["GMT"] = TimeSpan.Zero,
-            ["Z"] = TimeSpan.Zero,
-            ["CST"] = TimeSpan.FromHours(-6),
-            ["CDT"] = TimeSpan.FromHours(-5),
-            ["EST"] = TimeSpan.FromHours(-5),
-            ["EDT"] = TimeSpan.FromHours(-4),
-            ["MST"] = TimeSpan.FromHours(-7),
-            ["MDT"] = TimeSpan.FromHours(-6),
-            ["PST"] = TimeSpan.FromHours(-8),
-            ["PDT"] = TimeSpan.FromHours(-7),
-            ["AKST"] = TimeSpan.FromHours(-9),
-            ["AKDT"] = TimeSpan.FromHours(-8),
-            ["HST"] = TimeSpan.FromHours(-10)
+            localTime = TimeZoneInfo.ConvertTimeFromUtc(utcNow, timezone);
+            return true;
+        }
+
+        return false;
+    }
+
+    static bool TryGetTimeZoneInfo(string abbreviation, out TimeZoneInfo timezone)
+    {
+        Dictionary<string, string> timezoneIds = new(StringComparer.OrdinalIgnoreCase)
+        {
+            ["UTC"] = "UTC",
+            ["GMT"] = "UTC",
+            ["Z"] = "UTC",
+            ["CST"] = "Central Standard Time",
+            ["CDT"] = "Central Standard Time",
+            ["EST"] = "Eastern Standard Time",
+            ["EDT"] = "Eastern Standard Time",
+            ["MST"] = "Mountain Standard Time",
+            ["MDT"] = "Mountain Standard Time",
+            ["PST"] = "Pacific Standard Time",
+            ["PDT"] = "Pacific Standard Time",
+            ["AKST"] = "Alaskan Standard Time",
+            ["AKDT"] = "Alaskan Standard Time",
+            ["HST"] = "Hawaiian Standard Time"
         };
 
-        return offsets.TryGetValue(normalized, out offset);
+        if (!timezoneIds.TryGetValue(abbreviation, out string? timezoneId))
+        {
+            timezone = default!;
+            return false;
+        }
+
+        try
+        {
+            timezone = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
+            return true;
+        }
+        catch (TimeZoneNotFoundException)
+        {
+            timezone = default!;
+            return false;
+        }
+        catch (InvalidTimeZoneException)
+        {
+            timezone = default!;
+            return false;
+        }
     }
 
     static bool TryParseUtcOffset(string input, out TimeSpan offset)

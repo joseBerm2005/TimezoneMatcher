@@ -12,3 +12,4 @@ C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\refint\TimeMatcher.d
 C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\TimeMatcher.pdb
 C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\TimeMatcher.genruntimeconfig.cache
 C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\ref\TimeMatcher.dll
+C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\TimeMatcher.sourcelink.json
