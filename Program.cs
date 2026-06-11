@@ -47,9 +47,9 @@ partial class Program
 
             if (!hasEarlyTime)
             {
-                foreach (DateTime localTime in localTimes)
+                for (int index = 0; index < localTimes.Count; index++)
                 {
-                    Console.WriteLine(localTime.ToString("MM/dd/yyyy hh:mm tt"));
+                    Console.WriteLine($"{timezoneList[index].Label}: {localTimes[index]:MM/dd/yyyy hh:mm tt}");
                 }
 
                 return;
@@ -83,6 +83,9 @@ partial class Program
                 DateTime localTime = ConvertFromUtc(utcNow, timezone);
                 timezoneTimes.Add(localTime);
                 timezoneTargets.Add(timezone);
+
+                Console.WriteLine(timezone.Label);
+                Console.WriteLine(localTime);
             }
             else
             {
