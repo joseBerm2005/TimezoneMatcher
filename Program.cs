@@ -7,6 +7,8 @@ partial class Program
 
     static void Main(string[] args)
     {
+        // do while loop bc I feel it's better to always check
+        // after first input
         do
         {
             Console.Write("Enter a timezone (for example CST, EST, UTC, UTC+2, GMT-3): ");
@@ -20,17 +22,14 @@ partial class Program
             timezones.Add(abbreviation);
         } while (true);
 
-        DateTime utcNow = DateTime.UtcNow;
         List<TimezoneTarget> timezoneTargets = [];
 
-        Console.WriteLine("Current times:");
+        // Filter timezones: check for spelling errors, invalid timezones etc etc
         foreach (string abbreviation in timezones)
         {
             if (TimeMatcherTimezoneUtilities.TryResolveTimezone(abbreviation, out TimezoneTarget timezone))
             {
-                DateTime localTime = TimeMatcherTimezoneUtilities.ConvertFromUtc(utcNow, timezone);
                 timezoneTargets.Add(timezone);
-                Console.WriteLine($"{timezone.Label}: {localTime:MM/dd/yyyy hh:mm tt}");
             }
             else
             {
@@ -38,6 +37,6 @@ partial class Program
             }
         }
 
-        DefaultSearch.Run(timezoneTargets);
+        DefaultSearch.Run(timezoneTargets); // time for THE MEATS of the code
     }
 }

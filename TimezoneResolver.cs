@@ -3,6 +3,8 @@ using System.Text.RegularExpressions;
 
 static partial class TimeMatcherTimezoneUtilities
 {
+
+    // Converts a UTC DateTime to the local time in the specified timezone.
     public static DateTime ConvertFromUtc(DateTime utcDateTime, TimezoneTarget timezone)
     {
         if (timezone.TimeZoneInfo is not null)
@@ -17,7 +19,6 @@ static partial class TimeMatcherTimezoneUtilities
 
         return utcDateTime;
     }
-
     public static bool TryResolveTimezone(string abbreviation, out TimezoneTarget timezone)
     {
         string normalized = abbreviation.Trim();
@@ -37,6 +38,7 @@ static partial class TimeMatcherTimezoneUtilities
         timezone = default;
         return false;
     }
+
 
     private static bool TryGetTimeZoneInfo(string abbreviation, out TimeZoneInfo timezone)
     {
@@ -82,6 +84,7 @@ static partial class TimeMatcherTimezoneUtilities
         }
     }
 
+    // "UTC+2" or "GMT-3:30" get ripped apart to useable offsets
     private static bool TryParseUtcOffset(string input, out TimeSpan offset)
     {
         offset = default;
@@ -111,7 +114,7 @@ static partial class TimeMatcherTimezoneUtilities
         offset = parsedOffset;
         return true;
     }
-
+    // regex my beloved
     [GeneratedRegex("^(?:UTC|GMT)?(?<sign>[+-])(?<hours>\\d{1,2})(?::?(?<minutes>\\d{2}))?$", RegexOptions.IgnoreCase, "en-US")]
     private static partial Regex MyRegex();
 }
