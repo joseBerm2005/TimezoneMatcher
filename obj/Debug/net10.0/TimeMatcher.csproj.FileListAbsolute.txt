@@ -1,0 +1,14 @@
+C:\Users\Jose Berma\Downloads\TimeMatcher\bin\Debug\net10.0\TimeMatcher.exe
+C:\Users\Jose Berma\Downloads\TimeMatcher\bin\Debug\net10.0\TimeMatcher.deps.json
+C:\Users\Jose Berma\Downloads\TimeMatcher\bin\Debug\net10.0\TimeMatcher.runtimeconfig.json
+C:\Users\Jose Berma\Downloads\TimeMatcher\bin\Debug\net10.0\TimeMatcher.dll
+C:\Users\Jose Berma\Downloads\TimeMatcher\bin\Debug\net10.0\TimeMatcher.pdb
+C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\TimeMatcher.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\TimeMatcher.AssemblyInfoInputs.cache
+C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\TimeMatcher.AssemblyInfo.cs
+C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\TimeMatcher.csproj.CoreCompileInputs.cache
+C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\TimeMatcher.dll
+C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\refint\TimeMatcher.dll
+C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\TimeMatcher.pdb
+C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\TimeMatcher.genruntimeconfig.cache
+C:\Users\Jose Berma\Downloads\TimeMatcher\obj\Debug\net10.0\ref\TimeMatcher.dll
