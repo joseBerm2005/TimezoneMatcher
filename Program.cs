@@ -19,7 +19,7 @@ partial
 class Program
 {
     static readonly List<string> timezones = []; 
-    
+
     static void Main(string[] args)
     {
 
@@ -39,9 +39,8 @@ class Program
             {
                 string sign = offset >= TimeSpan.Zero ? "+" : "-";
                 TimeSpan absoluteOffset = offset.Duration();
-                Console.WriteLine(offset);
 
-                Console.WriteLine($"{abbreviation.ToUpperInvariant()} -> UTC{sign}{absoluteOffset:hh\\:mm}");
+             //   Console.WriteLine($"{abbreviation.ToUpperInvariant()} -> UTC{sign}{absoluteOffset:hh\\:mm}");
             }
             else {
                 Console.WriteLine($"Unknown timezone abbreviation: {abbreviation}");
