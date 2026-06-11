@@ -1,0 +1,1 @@
+public readonly record struct TimezoneTarget(string Label, TimeZoneInfo? TimeZoneInfo, TimeSpan? Offset);
